@@ -2,6 +2,26 @@
 
 class GalleryHtmlHelper extends GalleryPlugin {
 
+	function section_name($section = null) {
+		if (!empty($section)) {
+			switch ($section) {
+				case 'slides'			:
+					$name = __('Manage Slides', $this -> plugin_name);
+					break;
+				case 'galleries'		:
+					$name = __('Manage Galleries', $this -> plugin_name);
+					break;
+				case 'settings'			:
+					$name = __('Configuration', $this -> plugin_name);
+					break;
+			}
+			
+			return $name;
+		}
+		
+		return false;
+	}
+
 	function link($name = '', $href = '/', $args = array()) {
 		$defaults = array(
 			'title'			=>	(empty($args['title'])) ? $title : $args['title'],
@@ -41,9 +61,34 @@ class GalleryHtmlHelper extends GalleryPlugin {
 		return false;
 	}
 	
+	function timthumb_image($image = null, $width = null, $height = null, $quality = 100, $class = "slideshow", $rel = "") {	
+		$tt_image = '<img src="' . $this -> timthumb_url() . '?src=' . $image;
+		if (!empty($width)) { $tt_image .= '&w=' . $width; };
+		if (!empty($height)) { $tt_image .= '&h=' . $height; };
+		$tt_image .= '&q=' . $quality . '"';
+		$tt_image .= '&a=t';
+		if (!empty($class)) { $tt_image .= ' class="' . $class . '"'; };
+		if (!empty($rel)) { $tt_image .= ' rel="' . $rel . '"'; }
+		$tt_image .= ' />';
+		return $tt_image;
+	}
+	
+	function timthumb_image_src($image = null, $width = null, $height = null, $quality = 100) {	
+		$tt_image = $this -> timthumb_url() . '?src=' . $image;
+		if (!empty($width)) { $tt_image .= '&w=' . $width; };
+		if (!empty($height)) { $tt_image .= '&h=' . $height; };
+		$tt_image .= '&q=' . $quality;
+		$tt_image .= '&a=t';
+		return $tt_image;
+	}
+	
+	function timthumb_url() {
+		return site_url() . '/wp-content/plugins/slideshow-gallery/vendors/timthumb.php';
+	}
+	
 	function image_url($filename = null) {
 		if (!empty($filename)) {
-			return get_option('siteurl') . '/wp-content/uploads/slideshow-gallery/' . $filename;
+			return site_url() . '/wp-content/uploads/slideshow-gallery/' . $filename;
 		}
 		
 		return false;
