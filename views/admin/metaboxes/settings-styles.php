@@ -17,7 +17,7 @@
 					<?php
 					
 					$img = 'wp-content/plugins/' . $this -> plugin_name . '/screenshot-1.png';
-					$src = site_url() . '/wp-content/plugins/slideshow-gallery/vendors/timthumb.php?src=' . $img . '&w=50&h=50&q=100&a=t';
+					$src = plugins_url() . '/slideshow-gallery/vendors/timthumb.php?src=' . $img . '&w=50&h=50&q=100&a=t';
 					echo '<p><a target="_blank" href="' . $src . '">' . $src . '</a> <small>(' . __('click to open to test TimThumb', $this -> plugin_name) . ')</small></p>';
 					echo '<p><img src="' . $src . '" /></p>';
 					

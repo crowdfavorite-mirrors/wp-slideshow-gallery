@@ -23,8 +23,8 @@ $slides = stripslashes_deep($slides);
 					<p><?php echo $slide -> post_content; ?></p>
 					<?php $thumbnail_link = wp_get_attachment_image_src($slide -> ID, 'thumbnail', false); ?>
 					<?php if ($options['showthumbs'] == "true") : ?>
-						<?php if (!empty($slide -> guid)) : ?>
-							<a href="<?php echo $slide -> guid; ?>" target="_self" title="<?php echo esc_attr($slide -> post_title); ?>"><img src="<?php echo $this -> Html -> timthumb_image_src($full_image_href[0], $this -> get_option('thumbwidth'), $this -> get_option('thumbheight'), 100); ?>" alt="<?php echo $this -> Html -> sanitize($slide -> post_title); ?>" /></a>
+						<?php if (!empty($full_image_href[0])) : ?>
+							<a href="<?php echo $full_image_href[0]; ?>" target="_self" title="<?php echo esc_attr($slide -> post_title); ?>"><img src="<?php echo $this -> Html -> timthumb_image_src($full_image_href[0], $this -> get_option('thumbwidth'), $this -> get_option('thumbheight'), 100); ?>" alt="<?php echo $this -> Html -> sanitize($slide -> post_title); ?>" /></a>
 						<?php else : ?>
 							<a><img src="<?php echo $this -> Html -> timthumb_image_src($full_image_href[0], $this -> get_option('thumbwidth'), $this -> get_option('thumbheight'), 100); ?>" alt="<?php echo $this -> Html -> sanitize($slide -> post_title); ?>" /></a>
 						<?php endif; ?>

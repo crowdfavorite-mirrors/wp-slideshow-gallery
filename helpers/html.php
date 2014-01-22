@@ -83,12 +83,13 @@ class GalleryHtmlHelper extends GalleryPlugin {
 	}
 	
 	function timthumb_url() {
-		return site_url() . '/wp-content/plugins/slideshow-gallery/vendors/timthumb.php';
+		return plugins_url() . '/slideshow-gallery/vendors/timthumb.php';
 	}
 	
 	function image_url($filename = null) {
 		if (!empty($filename)) {
-			return site_url() . '/wp-content/uploads/slideshow-gallery/' . $filename;
+			$upload_dir = wp_upload_dir();
+			return $upload_dir['url']. '/slideshow-gallery/' . $filename;
 		}
 		
 		return false;
